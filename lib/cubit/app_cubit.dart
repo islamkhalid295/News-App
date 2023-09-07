@@ -10,7 +10,7 @@ import '../network/remote/dio_helper.dart';
 import 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
-  AppCubit(super.initialState);
+  AppCubit() : super(InitState());
 
   static AppCubit get(context) => BlocProvider.of(context);
   int currentIndex = 0;
@@ -59,6 +59,24 @@ class AppCubit extends Cubit<AppState> {
       print(error);
       emit(GetDataError());
     });
+
+  }
+  bool isDark = false;
+  TextStyle myTextStyle = TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.w600,
+    overflow: TextOverflow.ellipsis,);
+  void changeThemeMode ()
+  {
+    emit(ChangeMode());
+    isDark = !isDark;
+    if (isDark)
+      {
+        myTextStyle = TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w600,
+          overflow: TextOverflow.ellipsis,);
+      }else {
+        myTextStyle = TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.w600,
+        overflow: TextOverflow.ellipsis,);
+    }
+    print(isDark);
 
   }
 }

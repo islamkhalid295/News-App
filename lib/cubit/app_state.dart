@@ -11,3 +11,5 @@ class GetData extends AppState{}
 class GetDataSucssece extends AppState{}
 
 class GetDataError extends AppState{}
+
+class ChangeMode extends AppState{}

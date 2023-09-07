@@ -17,7 +17,7 @@ class TopScreen extends StatelessWidget {
       builder: (context, state) {
         var list = AppCubit.get(context).Top;
         return ConditionalBuilderRec(
-          condition: list.length > 0,
+          condition: list.isNotEmpty,
           builder:(context) =>  buildNewsItem(list),
           fallback:(context) =>  Center(child: CircularProgressIndicator()),
         );

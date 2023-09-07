@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter_app/cubit/app_cubit.dart';
 
 Widget buildNewsItem (List list){
   return Padding(
@@ -28,11 +29,7 @@ Widget buildNewsItem (List list){
                   Expanded(
                       child: Text(
                         list[index]['title'],
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                        style: AppCubit.get(context).myTextStyle,
                         maxLines: 3,
                       )),
                   Text(list[index]['pubDate'],style: TextStyle(color: Colors.grey),),
