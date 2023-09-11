@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_flutter_app/network/local/cacheHelper.dart';
 
 
 import '../modules/science_screen.dart';
@@ -64,10 +65,20 @@ class AppCubit extends Cubit<AppState> {
   bool isDark = false;
   TextStyle myTextStyle = TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.w600,
     overflow: TextOverflow.ellipsis,);
-  void changeThemeMode ()
+  void changeThemeMode ({bool? fromShared})
   {
-    emit(ChangeMode());
-    isDark = !isDark;
+    if (fromShared != null)
+      {
+        isDark = fromShared;
+        emit(ChangeMode());
+      }else
+        {
+
+          isDark = !isDark;
+          CacheHelper.putboolean(key: 'isDark', value: isDark)?.then((value) {
+            emit(ChangeMode());
+          });
+        }
     if (isDark)
       {
         myTextStyle = TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w600,
