@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cubit/app_cubit.dart';
 import 'cubit/app_state.dart';
-
+import 'modules/search.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,13 +16,21 @@ class HomeScreen extends StatelessWidget {
         AppCubit cubit = AppCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-              title: Text(
-                "News App",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-              ),
+            title: Text(
+              "News App",
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
             actions: [
-              IconButton(onPressed: (){}, icon: Icon(Icons.search)),
-              IconButton(onPressed: (){cubit.changeThemeMode();}, icon: Icon(Icons.brightness_4_outlined)),
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Search(),));
+                  },
+                  icon: Icon(Icons.search)),
+              IconButton(
+                  onPressed: () {
+                    cubit.changeThemeMode();
+                  },
+                  icon: Icon(Icons.brightness_4_outlined)),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(

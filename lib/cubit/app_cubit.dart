@@ -30,6 +30,7 @@ class AppCubit extends Cubit<AppState> {
   List Top = [];
   List Sports = [];
   List Science = [];
+  List search = [];
   void getNews (){
     emit(Loding());
     DioHelper.getData('api/1/news',
@@ -61,6 +62,21 @@ class AppCubit extends Cubit<AppState> {
       emit(GetDataError());
     });
 
+  }
+
+  void getSearch (value) {
+    emit(Loding());
+    DioHelper.getData('api/1/news',
+        {
+          'q' : '$value',
+          'apiKey': 'pub_28793fc9a3e454f2a8bd56e834c38948d309d'
+        }).then((value) {
+      search = value.data['results'];
+      emit(GetSearch());
+    }).catchError((error) {
+      print(error);
+      emit(GetsearchError());
+    });
   }
   bool isDark = false;
   TextStyle myTextStyle = TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.w600,
